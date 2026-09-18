@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "paths": {
+      "@corruptintel/database": ["../../packages/database/src/index.ts"],
+      "@corruptintel/security": ["../../packages/security/src/index.ts"],
+      "@corruptintel/shared": ["../../packages/shared/src/index.ts"],
+      "@corruptintel/ai": ["../../packages/ai/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

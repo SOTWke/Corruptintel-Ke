@@ -1,0 +1,22 @@
+{
+  "name": "corruptintel",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Evidence-first AI corruption intelligence platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:worker": "npm run dev --workspace=apps/worker",
+    "migrate": "node packages/database/migrate.js",
+    "seed:admin": "node packages/database/seed-admin.js",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
