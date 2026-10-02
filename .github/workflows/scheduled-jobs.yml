@@ -1,0 +1,28 @@
+name: Scheduled ingestion and extraction
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  run-ingest:
+    if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger ingest
+        run: |
+          curl -sf -X POST "${{ secrets.CORRUPTINTEL_API_URL }}/api/v1/internal/run-ingest" \
+            -H "x-internal-secret: ${{ secrets.CORRUPTINTEL_INTERNAL_SECRET }}" \
+            -H "Content-Type: application/json"
+
+  run-extract:
+    if: github.event.schedule == '*/15 * * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger extraction
+        run: |
+          curl -sf -X POST "${{ secrets.CORRUPTINTEL_API_URL }}/api/v1/internal/run-extract" \
+            -H "x-internal-secret: ${{ secrets.CORRUPTINTEL_INTERNAL_SECRET }}" \
+            -H "Content-Type: application/json"
