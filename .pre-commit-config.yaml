@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: detect-private-key
+      - id: mixed-line-ending
+
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.12.0
+    hooks:
+      - id: reorder-python-imports
+        language_version: python3
+
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint
+        entry: npx eslint --fix
+        language: system
+        types: [typescript, tsx, javascript, jsx]
+        pass_filenames: true
+
+      - id: prettier
+        name: Prettier
+        entry: npx prettier --write
+        language: system
+        types: [typescript, tsx, javascript, jsx, json, css, markdown]
+        pass_filenames: true
+
+      - id: tsc
+        name: TypeScript Compiler
+        entry: npx tsc --noEmit
+        language: system
+        pass_filenames: false
+        types: [typescript, tsx]
